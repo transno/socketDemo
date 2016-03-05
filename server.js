@@ -24,4 +24,24 @@ io.on('connection', function(socket) {
         console.log(msg);
         io.emit('server_chat_message', msg);
     });
+
+    socket.on('login', function(msg) {
+        socket.name = msg.userid;
+
+        if (!onlineUsers.hasOwnProperty(msg.userid)) {
+            onlineUsers[msg.userid] = msg.username;
+            onlineNum++;
+        }
+
+        io.emit('logined', { onlineUsers: onlineUsers, onlineNum: onlineNum, user: msg });
+    });
+
+    socket.on('disconnect', function() {
+        if (onlineUsers.hasOwnProperty(socket.name)) {
+            var msg = onlineUsers[socket.name];
+            delete onlineUsers[socket.name];
+            onlineNum--;
+            io.emit('logout', { onlineUsers: onlineUsers, onlineNum: onlineNum, user: msg });
+        }
+    });
 })
