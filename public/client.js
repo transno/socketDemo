@@ -20,6 +20,7 @@ var Chatroom = {
         if (msg != '') {
             var message = {
                 userid: this.userid,
+                username: this.username,
                 msg: msg
             }
             this.socket.emit('clinet_chat_message', message);
@@ -50,22 +51,36 @@ var Chatroom = {
         });
 
         // 接收聊天信息
-        this.socket.on('server_chat_message', function(msg) {      
-            var messages = Chatroom.myHtml(msg.msg);
-            console.log(msg.userid);
-            console.log(self.userid);
+        this.socket.on('server_chat_message', function(msg) {
+            var myMessages = Chatroom.myHtml(msg.msg, msg.username);
+            var otherMessages = Chatroom.otherHtml(msg.msg, msg.username);
             if (msg.userid == self.userid) {
-            	console.log(msg);
-                $('#chatCon').append(messages);
+                $('#chatCon').append(myMessages);
+            } else {
+                $('#chatCon').append(otherMessages);
             }
-            // $('#messages').append('<div class="chatLi">' + msg + '</div>');
         });
     },
-    myHtml: function(msg) {
-        var myHtml = '<div class="messageCon my clear">' +
+    myHtml: function(msg, username) {
+        var myHtml = '<div class="messageCon my">' +
+            			'<div class="username">' + username + '</div>' +
+            			'<div class="clear">' +
+            				'<div class="img"></div>' +
+            				'<div class="messageBox clear">' +
+            					'<div class="info">' + msg + '</div>' +
+            				'</div>' +
+            			'</div>' +
+            		'</div>';
+        return myHtml;
+    },
+    otherHtml: function(msg, username) {
+        var myHtml = '<div class="messageCon other">' +
+            '<div class="username">' + username + '</div>' +
+            '<div class="clear">' +
             '<div class="img"></div>' +
             '<div class="messageBox clear">' +
             '<div class="info">' + msg + '</div>' +
+            '</div>' +
             '</div>' +
             '</div>';
         return myHtml;
