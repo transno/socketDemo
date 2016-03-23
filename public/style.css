@@ -234,8 +234,8 @@ body {
     vertical-align: top;
     padding: 0 30px;
     font-size: 12px;
-    height: 24px;
-    line-height: 24px;
+    height: 20px;
+    line-height: 20px;
     background-color: #ff9800;
     border-radius: 11px;
     color: #fff;
@@ -243,7 +243,7 @@ body {
 
 .welcomeCon span b {
     margin: 0 3px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .messageCon {
@@ -263,6 +263,10 @@ body {
     height: 60px;
     border-radius: 6px;
     background-color: #bdbdbd;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
 }
 
 .messageCon.my .img {
