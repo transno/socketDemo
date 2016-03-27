@@ -10,9 +10,18 @@
 <body>
 	<div class="loginCon">
 		<div class="loginBox">
-			<div class="topHead">欢迎加入江湖!</div>
-			<div class="input"><input type="text" placeholder="请输入一个响当当的名头…" id="userNameInput"></div>
-			<div class="btn"><input type="submit" value="本少侠的名字就这样定了" onclick="Chatroom.userNameSubmit()"></div>
+			<div class="firstLogin">
+				<div class="topHead">欢迎加入江湖！</div>
+				<div class="input"><input type="text" placeholder="请输入一个响当当的名头…" id="userNameInput"></div>
+				<div class="btn"><input type="submit" value="本少侠的名字就这样定了" onclick="Chatroom.userNameSubmit()"></div>
+			</div>
+			<div class="hasNameLogin">
+				<div class="topHead">请选择身份加入江湖！</div>
+				<div class="loginAvatarCon">
+					<div class="newBtn" id="newBtn"><i style="background-image: url(avatar/user.jpg)"></i><p>使用新身份</p></div>
+					<div class="oldBtn" id="oldBtn"><i></i><p></p></div>
+				</div>
+			</div>
 		</div>
 		<div class="loginCoryright">©CoryRight by <a href="https://github.com/transno/socketDemo">幽忧偶心</a></div>
 	</div>

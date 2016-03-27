@@ -130,6 +130,10 @@ body {
     width: 100%;
 }
 
+.firstLogin {
+    display: none;
+}
+
 .loginBox .topHead {
     text-align: center;
     width: 100%;
@@ -138,7 +142,7 @@ body {
     margin-bottom: 30px;
 }
 
-.loginBox .input {
+.loginBox .firstLogin .input {
     margin: 0 auto 20px;
     width: 50%;
     max-width: 800px;
@@ -148,7 +152,7 @@ body {
     overflow: hidden;
 }
 
-.loginBox .input input[type="text"] {
+.loginBox .firstLogin .input input[type="text"] {
     border: none;
     border-bottom: 2px solid #e0e0e0;
     width: 100%;
@@ -163,11 +167,11 @@ body {
     margin: 0;
 }
 
-.loginBox .input input[type="text"]:focus {
+.loginBox .firstLogin .input input[type="text"]:focus {
     border-bottom-color: #03a9f4;
 }
 
-.loginBox .btn {
+.loginBox .firstLogin .btn {
     margin: 0 auto 10px;
     width: 50%;
     max-width: 800px;
@@ -176,7 +180,7 @@ body {
     border-radius: 0;
 }
 
-.loginBox .btn input[type="submit"] {
+.loginBox .firstLogin .btn input[type="submit"] {
     width: 100%;
     border-radius: 0;
     font-family: '微软雅黑';
@@ -193,8 +197,48 @@ body {
     font-size: 20px;
 }
 
-.loginBox .btn input[type="submit"]:hover {
+.loginBox .firstLogin .btn input[type="submit"]:hover {
     box-shadow: 0 0 10px #A5CCEC;
+}
+
+.loginBox .loginAvatarCon {
+    text-align: center;
+}
+
+.loginBox .newBtn,
+.loginBox .oldBtn {
+    display: inline-block;
+    vertical-align: top;
+    /*width: 60px;*/
+    margin: 0 45px;
+    color: #666;
+    cursor: pointer;
+    /*height: 60px;*/
+    /*padding: 3px;*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #f9f9f9;*/
+}
+
+.loginBox .newBtn i,
+.loginBox .oldBtn i {
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: all .5s ease;
+}
+
+.loginBox .newBtn:hover i,
+.loginBox .oldBtn:hover i {
+    box-shadow: 0 0 10px #666;
 }
 
 .loginCoryright {
@@ -251,7 +295,7 @@ body {
     padding: 0 10px;
 }
 
-.messageCon .username{
+.messageCon .username {
     font-size: 12px;
     color: #bdbdbd;
     line-height: 20px;
@@ -273,7 +317,7 @@ body {
     float: right;
 }
 
-.messageCon.my .username{
+.messageCon.my .username {
     text-align: right;
 }
 

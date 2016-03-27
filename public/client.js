@@ -3,19 +3,28 @@ var Chatroom = {
     userid: null,
     socket: null,
     picurl: 1,
-    userNameSubmit: function() {
-        var username = $('#userNameInput').val();
-        if (username == '') {
-            alert('少侠，行走江湖来个响亮的名头吧！');
-            return;
-        }
-        if (username.length > 10) {
-            alert('少侠，哪国人啊，名头太响了不能在这混喔！');
-            return;
+    userNameSubmit: function(username, id, pic) {
+        if (localStorage.getItem('user')) {
+            var userinfo = JSON.parse(localStorage.getItem('user'));
+            username = userinfo.username;
+            id = userinfo.userid;
+            pic = userinfo.pic;
+        } else {
+            username = $('#userNameInput').val();
+            id = this.giveUid();
+            pic = this.getRandom();
+            if (username == '') {
+                alert('少侠，行走江湖来个响亮的名头吧！');
+                return;
+            }
+            if (username.length > 10) {
+                alert('少侠，哪国人啊，名头太响了不能在这混喔！');
+                return;
+            }
         }
 
         $('.loginCon').hide();
-        this.init(username);
+        this.init(username, id, pic);
         return false;
     },
     giveUid: function() {
@@ -37,17 +46,22 @@ var Chatroom = {
     getRandom: function() {
         return Math.ceil(Math.random() * 30);
     },
-    init: function(username) {
-        this.userid = this.giveUid();
+    init: function(username, id, pic) {
+        this.userid = id;
         this.username = username;
-        this.picurl = this.getRandom();
+        this.picurl = pic;
         self.myHtml = this.myHtml();
         self.userid = this.userid;
         this.socket = io();
 
         // 发送登录信息
-        this.socket.emit('login', { userid: this.userid, username: this.username });
-
+        var userInfo = {
+            userid: this.userid,
+            username: this.username,
+            pic: this.picurl
+        }
+        this.socket.emit('login', userInfo);
+        localStorage.setItem('user', JSON.stringify(userInfo));
         // 接收登录信息
         this.socket.on('logined', function(msg) {
             // console.log(msg);
@@ -115,9 +129,31 @@ $(function() {
     $('body').css('min-height', h);
 
     $('#userNameInput').keydown(function(event) {
-    	// console.log(event);
-    	if (event.keyCode == 13) {
-    		Chatroom.userNameSubmit();
-    	}
+        // console.log(event);
+        if (event.keyCode == 13) {
+            Chatroom.userNameSubmit();
+        }
+    });
+
+    if (localStorage.getItem('user')) {
+        var userinfo = JSON.parse(localStorage.getItem('user'));
+        $('.hasNameLogin').css('display', 'block');
+        $('#oldBtn').find('i').css('background-image', 'url(avatar/' + userinfo.pic + '.jpg)');
+        $('#oldBtn').find('p').text(userinfo.username);
+    } else {
+        $('.hasNameLogin').css('display', 'none');
+        $('.firstLogin').css('display', 'block');
+    }
+
+    $('#oldBtn').click(function(event) {
+        event.preventDefault();
+        Chatroom.userNameSubmit();
+    });
+
+    $('#newBtn').click(function(event) {
+        event.preventDefault();
+        $('.hasNameLogin').css('display', 'none');
+        $('.firstLogin').css('display', 'block');
+        localStorage.removeItem('user');
     });
 })
