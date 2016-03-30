@@ -130,7 +130,7 @@ body {
     width: 100%;
 }
 
-.firstLogin {
+.firstLogin,.hasNameLogin {
     display: none;
 }
 

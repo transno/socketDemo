@@ -138,6 +138,7 @@ $(function() {
     if (localStorage.getItem('user')) {
         var userinfo = JSON.parse(localStorage.getItem('user'));
         $('.hasNameLogin').css('display', 'block');
+        $('.firstLogin').css('display', 'none');
         $('#oldBtn').find('i').css('background-image', 'url(avatar/' + userinfo.pic + '.jpg)');
         $('#oldBtn').find('p').text(userinfo.username);
     } else {
